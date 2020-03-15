@@ -1,3 +1,4 @@
+import { listService } from './list.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
 
@@ -9,10 +10,23 @@ import { HttpService } from '../http.service';
 export class ListComponent implements OnInit {
   [x: string]: any;
 
-  constructor(private_http:HttpService) { }
-   
+  posts: any = [];
+  hasLoaded = false;
+
+  constructor(private http: HttpService,
+              private listService: listService) { }
+
   ngOnInit() {
-    this._http.myMethod();
+    // this._http.myMethod();
+    this.loadPosts();
+  }
+
+  loadPosts() {
+    this.listService.getPosts().subscribe(response => {
+      this.posts = response;
+      this.hasLoaded = true;
+      console.log(this.posts);
+    });
   }
 
 }

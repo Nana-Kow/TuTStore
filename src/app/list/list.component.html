@@ -1,1 +1,6 @@
-<p>list works!</p>
+<p *ngIf="!hasLoaded"> Please Wait....</p>
+
+<div *ngFor="let item of posts">
+  <h5>{{item.title}}</h5>
+  <p>{{item.body}}</p>
+</div>
